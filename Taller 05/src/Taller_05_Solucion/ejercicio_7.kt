@@ -21,8 +21,7 @@ fun precio_carro (lista:MutableList<Pair<String, Double>>, placa : String):Doubl
     for ((plac, precio) in lista){
         if (plac == placa){p= precio}
     }
-    return p
-}
+    return p}
 fun main() {
     var lista :MutableList<Pair<String, Double>> = mutableListOf()
     var placa: String
