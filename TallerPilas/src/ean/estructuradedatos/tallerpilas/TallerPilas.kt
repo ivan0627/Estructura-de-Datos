@@ -58,7 +58,7 @@ fun sumarParesTresCifras(pila: IStack<Int>): Int { //funcion n2
  * en una pila de números. Si no existe ningún número de dos cifras, retorne
  * null
  */
-fun mayorDeDosCifras(pila: IStack<Int>): Int? {//complejidad n
+fun mayorDeDosCifras(pila: IStack<Int>): Int? {//complejidad n2
     val copia = pila.copy()
     var ultimo: Int
     var masGrande = 0
@@ -80,9 +80,17 @@ fun mayorDeDosCifras(pila: IStack<Int>): Int? {//complejidad n
  * de la pila. GEnérica
  */
 fun <T> guardarEnElFondo(p: IStack<T>, elem: T) :Unit{//complejidad n
-         p.clear()
-       p.push(elem)
-
+        var auxiliar: IStack<T> = TLinkedStack()
+    while (!p.isEmpty){
+        auxiliar.push(p.peek())
+        p.pop()
+    }
+    p.push(elem)
+    auxiliar = invertirPila(auxiliar)
+    while (!auxiliar.isEmpty){
+        p.push(auxiliar.peek())
+        auxiliar.pop()
+    }
 }
 
 /**
@@ -105,6 +113,7 @@ fun <T> tamPila(p: IStack<T>) : Int { //complejidad n
  */
 fun <T> invertirPila(pila: IStack<T>): IStack<T> { //complejidad n
     var copy = pila.copy()
+    copy.clear()
     while (!pila.isEmpty){
         copy.push(pila.peek())
         pila.pop()
@@ -141,7 +150,7 @@ fun <T> copiarPila(pila: IStack<T>): IStack<T> { // complejidad n
  * pila todas las ocurrencias del elemento que se recibe como parámetro.
  * No debe retornar nada.
  */
-fun <T> eliminarElementoPila(pila: IStack<T>, elem: T) { //complejidad n
+fun <T> eliminarElementoPila(pila: IStack<T>, elem: T) { //complejidad n2
     var copia : IStack<T> = TArrayStack()
     while (!pila.isEmpty){
         if (pila.peek()==elem){
@@ -205,7 +214,7 @@ fun palindrome(frase: String): Boolean { //complejidad n
  * Ejercicio 11
  * Determinar si dos pilas son iguales
  */
-fun <T> igualesPilas(pila1: IStack<T>, pila2: IStack<T>): Boolean {
+fun <T> igualesPilas(pila1: IStack<T>, pila2: IStack<T>): Boolean { //complejidad n2
     var flag = true
     var copiapila1 = pila1.copy()
     var tamano1 = tamPila(copiapila1)
