@@ -84,7 +84,7 @@ internal class ConvertidorDeInfijoAPostfijoTest {
         assertEquals("a b - c * d e * f g % / h + /", postfijo)
 
         // 9. Prueba
-        postfijo = convertir("(a * (((b + c) * d) + e))")
+        println( convertir("((3+5)*2-10)/2+4-7"))
         assertEquals("a b c + d * e + *", postfijo)
     }
 
