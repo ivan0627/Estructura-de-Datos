@@ -389,7 +389,25 @@ fun esPalindrome(palabra: String): Boolean {
  * entero más pequeño.
  */
 fun mayorDeUnaLista(lista: IList<Int>): Int {
-    TODO("Completar")
+    fun mayorDeUnaLista(lista: IList<Int>): Int {
+        if(lista.isEmpty){
+            return 0
+        }
+        else if(lista.size==1){
+            return lista.first
+        }
+        else{
+            val ultimo = lista.last
+            val penultimo = lista.get(lista.size-2)
+            if(ultimo>penultimo){
+                lista.remove(lista.size-2)
+            }
+            else{
+                lista.removeLast()
+            }
+            return mayorDeUnaLista(lista)
+        }
+    }
 }
 
 
@@ -429,5 +447,23 @@ fun puntosPrimerCuadrante(puntos: IList<Punto>): IList<Punto> {
  * compárelo con el punto más lejano del resto de la lista.
  */
 fun puntoMasLejano(puntos: IList<Punto>): Punto? {
-    TODO("Completar")
+    fun puntoMasLejano(puntos: IList<Punto>): Punto? {
+        if(puntos.isEmpty){
+            return null
+        }
+        else if(puntos.size==1){
+            return puntos.first
+        }
+        else{
+            val ultimo = puntos.last
+            val penultimo = puntos.get(puntos.size-2)
+            if(ultimo.distanciaAlOrigen()>penultimo.distanciaAlOrigen()){
+                puntos.remove(puntos.size-2)
+            }
+            else{
+                puntos.removeLast()
+            }
+            return puntoMasLejano(puntos)
+        }
+    }
 }
