@@ -13,6 +13,7 @@ package ean.estructuradedatos.taller
 
 import ean.collections.IList
 import ean.collections.TList
+import ean.collections.newLinkedList
 import kotlin.math.floor
 import kotlin.math.pow
 import kotlin.math.sqrt
@@ -162,7 +163,15 @@ fun cantidadDigitosPares(n: Int): Int {
  * Por ejemplo: el numero 100011110 es binario, pero 231 no lo es
  */
 fun esNumeroBinario(n: Int): Boolean {
-    TODO("Completar")
+    if (n in 0..9) {
+        return n == 0 || n == 1
+    } else {
+        return if (n % 10 != 0 || n % 10 != 1) {
+            esNumeroBinario(n / 10)
+        } else {
+            false
+        }
+    }
 }
 
 /**
@@ -304,7 +313,15 @@ fun buscarElementoEnUnaLista(lista: IList<Int>, elem: Int): Int =when{
  * Ejemplo: convertirListaDigitosNumero([3, 4, 1, 7, 9]) == 34179
  */
 fun convertirListaDigitosNumero(digitos: IList<Int>): Int {
-    TODO("Completar!")
+    if(digitos.size == 1){
+        return digitos.first
+    }
+    else{
+        var primero = digitos.first
+        digitos.removeFirst()
+        var tamañoLista = digitos.size
+        return primero*(Math.pow(10.0,tamañoLista.toDouble())).toInt()+ convertirListaDigitosNumero(digitos)
+    }
 }
 
 /**
@@ -316,14 +333,33 @@ fun convertirListaDigitosNumero(digitos: IList<Int>): Int {
  * - sino es igual al primero, entonces hay que ver si el elemento está en el resto de la lista
  */
 fun <T> existeElemento(lista: IList<T>, elem: T): Boolean {
-    TODO("Completar")
+    if(lista.isEmpty){
+        return false
+    }
+    if(!lista.isEmpty&&lista.first == elem){
+        return true
+    }
+    else{
+        lista.removeFirst()
+        return existeElemento(lista, elem)
+    }
 }
 
 /** Escribir una función recursiva que, sin usar pilas ni colas
  * ni ninguna otra lista, obtenga la misma lista, pero invertida
  */
 fun invertirLista(lista: IList<Char>): IList<Char> {
-    TODO("Completar")
+    if(lista.isEmpty){
+        var inversa = lista
+        return inversa
+    }
+    else {
+
+        var primero = newLinkedList(lista.last)
+        lista.removeLast()
+        var inversa = primero + invertirLista(lista)
+        return inversa
+    }
 }
 
 /**
@@ -331,8 +367,22 @@ fun invertirLista(lista: IList<Char>): IList<Char> {
  * a izquierda. Esta función recibe la palabra (sin espacios) y de forma recursiva
  * determina si la palabra es palíndrome.
  */
-fun esPalindrome(palabra: String): Boolean = TODO("Completar")
+fun esPalindrome(palabra: String): Boolean {
+    if (palabra.length == 1) {
+        return true
+    } else {
+        var primero = palabra.first()
+        var ultimo = palabra.last()
 
+        if (primero == ultimo) {
+            var palabra1 = palabra.substring(1)
+            palabra1 = palabra1.substring(0, palabra1.length - 1)
+            return esPalindrome(palabra1)
+        } else {
+            return false
+        }
+    }
+}
 /**
  * Recursividad con listas. Escriba una función recursiva
  * Obtiene el número más grande de la lista. Si la lista está vacía retorne el número
