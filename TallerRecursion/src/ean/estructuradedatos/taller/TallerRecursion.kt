@@ -319,8 +319,8 @@ fun convertirListaDigitosNumero(digitos: IList<Int>): Int {
     else{
         var primero = digitos.first
         digitos.removeFirst()
-        var tamañoLista = digitos.size
-        return primero*(Math.pow(10.0,tamañoLista.toDouble())).toInt()+ convertirListaDigitosNumero(digitos)
+        var tamanoLista = digitos.size
+        return primero*(Math.pow(10.0,tamanoLista.toDouble())).toInt()+ convertirListaDigitosNumero(digitos)
     }
 }
 
@@ -408,8 +408,6 @@ fun mayorDeUnaLista(lista: IList<Int>): Int {
             return mayorDeUnaLista(lista)
         }
     }
-}
-
 
 /**
  * Una clase auxiliar
